@@ -20,28 +20,28 @@ def MaximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
 
     # armo el lagrangiano
     Lagrange = FuncObjetivo + t *(SujetoA) # t⋅(m - px⋅x - py⋅y) + x⋅y
-    Lagrange
+    
     
     # derivo en función de cada variable 
     dx = Lagrange.diff(x) # -px⋅t + y
-    dx
+    
     
     dy = Lagrange.diff(y) # -py⋅t + x
-    dy
+   
     
     dt = Lagrange.diff(t) # m - px⋅x - py⋅y
-    dt
+    
     
     # igualo a cero dx y dy y las dx y dy como funciones de t
     t1 = sp.solve(dx, t) # [ y / px ]
-    t1
+   
     
     t2 = sp.solve(dy, t) # [ x / py ]
-    t2
+   
     
     # igualo los resultados
     ig = sp.Eq(t1[0], t2[0]) # y / px = x / py
-    ig
+    
     
     # despejo la igualdad en función de x y de y para encontrar x e y óptimos
     xstar = sp.solve(ig, x)[0] # xstar = ￼￼￼py * y / px
@@ -94,7 +94,7 @@ def MaximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     xoptimo
     sp.pprint ( 'La función se optimiza cuando X es igual a ' +  str(xoptimo ))
     
-    return (xoptimo, yoptimo)
+    return (Lagrange, dx, dy, dt, t1. t2, ig, xoptimo, yoptimo)
 
 # grafico las dos formulas 
 def GraficarRestriccion(FuncObjetivo, SujetoA, m, px, py):
@@ -115,8 +115,6 @@ def GraficarRestriccion(FuncObjetivo, SujetoA, m, px, py):
     p1
     p1.show() # TODO: me gustaría poder rotar el gráfico para que sea vea bien el punto en que se intersecan
     
-    return
-
 
 
 m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
