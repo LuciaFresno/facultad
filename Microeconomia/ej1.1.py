@@ -81,14 +81,15 @@ yoptimo
 # grafico las dos formulas 
 
 
-limx = m/px
-limy = m/py
-SujetoA
-a = sp.solve(SujetoA, 'm')[0]
-a = a.subs({'px' : px , 'py' : py})
-a
-p1 = plot3d( FuncObjetivo ,(x, 0, limx), (y,0,limy), show=False)
-p2 = plot3d(a, show=False)
+limx = m/px # 50.0
+limy = m/py # 20.0
+
+SAGraficable = sp.solve(SujetoA, 'm')[0] # px * x + py * y
+SAGraficable = SAGraficable.subs({'px' : px , 'py' : py}) # 2*x + 5*y
+
+
+p1 = plot3d(FuncObjetivo,(x, 0, limx), (y,0,limy), show=False)
+p2 = plot3d(SAGraficable, show=False)
 p1.append(p2[0])
 p1
 p1.show() # me gustaría poder rotar el gráfico para que sea vea bien el punto en que se intersecan
