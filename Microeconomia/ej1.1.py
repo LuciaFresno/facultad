@@ -18,11 +18,13 @@ m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
 Presupuesto = m - px*x - py*y
 Utilidad = x*y
 
-aux.maximizarRestriccion(Utilidad, 
+ej11 = aux.maximizarRestriccion(Utilidad, 
                      Presupuesto,
                      100,
                      2,
                      5)
+
+ej11
 
 aux.graficarRestriccion(Utilidad,
                     Presupuesto,
