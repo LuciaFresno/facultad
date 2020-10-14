@@ -58,8 +58,8 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
              'igualdad': ig, 
              'xstar': xstar,  
              'ystar': ystar, 
-             'xoptimo': xoptimo,
-             'yoptimo': yoptimo})
+             'xoptimo': float(xoptimo),
+             'yoptimo': float(yoptimo)})
 
 # grafico las dos formulas 
 def graficarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
