@@ -2,7 +2,7 @@
 def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     import sympy as sp
     sp.init_printing()
-    m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
+    m, x, y, px, py, t , xoptimo, yoptimo = sp.symbols('m, x, y, px, py, t, xoptimo, yoptimo')
 
     # armo el lagrangiano
     Lagrange = FuncObjetivo + t *(SujetoA) 
@@ -24,8 +24,6 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
         
     # despejo la igualdad en función de x y de y para encontrar x e y óptimos
     xstar = sp.solve(ig, x)[0] 
-    ystar = sp.solve(ig, y)[0] 
-    
     
     # reemplazo xstar en dt para encontrar el y óptimo
     yoptimo = dt.subs(x, xstar) 
@@ -37,9 +35,15 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     yoptimo = yoptimo.subs({'px': ipx, 'py': ipy , 'm': im})
     
     
-    # reemplazo xstar en dt para encontrar el x óptimo
-    xoptimo = dt.subs(y, ystar)  
-        
+    
+    
+    ystar = sp.solve(ig, y)[0] 
+    if ystar == 0: # TODO: entender por qué a veces ystar da 0
+        xoptimo = dt.subs({'y': yoptimo})
+    else:        
+        # reemplazo xstar en dt para encontrar el x óptimo
+        xoptimo = dt.subs(y, ystar)  
+    
     # igualo a cero y pongo dt en función de y
     xoptimo = sp.solve(xoptimo, x)[0]  
     
@@ -49,11 +53,11 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     
     return ({'Formula Lagrange': Lagrange, 
              'Lx': dx, 
-             'xstar': xstar, 
              'Ly':  dy, 
-             'ystar': ystar, 
              'Lt': dt, 
-             'igualdad': ig,  
+             'igualdad': ig, 
+             'xstar': xstar,  
+             'ystar': ystar, 
              'xoptimo': xoptimo,
              'yoptimo': yoptimo})
 
