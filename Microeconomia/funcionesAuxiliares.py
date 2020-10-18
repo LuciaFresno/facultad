@@ -19,8 +19,7 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     t2 = sp.solve(dy, t) 
        
     # igualo los resultados
-    ig = sp.Eq(t1[0], t2[0])
-    # verificarC1O(ig)
+    ig = verificarC1O(t1[0], t2[0])
         
     # despejo la igualdad en función de x y de y para encontrar x e y óptimos
     xstar = sp.solve(ig, x)[0] 
@@ -30,6 +29,7 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     
     # igualo a cero y pongo dt en función de y
     yoptimo = sp.solve(yoptimo, y)[0] 
+    
     
     # otorgo valores para averiguar el valor de y en el punto de optimización
     yoptimo = yoptimo.subs({'px': ipx, 'py': ipy , 'm': im})
@@ -42,11 +42,11 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
         xoptimo = dt.subs({'y': yoptimo})
     else:        
         # reemplazo xstar en dt para encontrar el x óptimo
-        xoptimo = dt.subs(y, ystar)  
+        xoptimo = dt.subs({'y': ystar})  
     
     # igualo a cero y pongo dt en función de y
-    xoptimo = sp.solve(xoptimo, x)[0]  
-    
+    xoptimo = sp.solve(xoptimo, x)[0] 
+        
     # otorgo valores para averiguar el valor de y en el punto de optimización
     xoptimo = xoptimo.subs({'px': ipx, 'py': ipy , 'm': im})
     
@@ -85,25 +85,34 @@ def graficarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     
 
 
-def verificarC1O(igualdad):
+def verificarC1O(it1, it2):
     import sympy as sp
     sp.init_printing()
     m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
+    
+    igualdad = sp.Eq(it1-it2)
     
     # evalúo condicion de primer orden 
     # Muestra en que punto, la tasa a la que el mercado intercambia un bien por otro es igual a la tasa a la que el consumidor lo hace. Muestra en que punto  e encuentra la cesta de bienes que maximiza la utilidad del consumidor ya que gasta toda su renta
     # La condición de optimalidad indica que la tasa a la que el individuo intercambia un bien por otro es igual a la tasa a la que el mercado lo hace, esto no tiene nada que ver con el valor de la renta que percibe
     
     sp.pprint(f'Igualdad para verificar la 1er cond de optimalidad: {igualdad}')
-    ig = sp.solve(igualdad, y)[0]
+    ig = sp.solve(igualdad, y)[0]   
+        
     sp.pprint(f"ig: {ig}")
+    
     C1O = False    
-    if ig == px*x/y: # TODO: arreglar esto , algo no está evaluando bien
+    if ig == px*x/py: # TODO: arreglar esto , algo no está evaluando bien
         C1O = True
     
-    sp.pprint(C1O)
-    return ({'C1O': C1O})
+    sp.pprint(f"La condición de primer orden se cumple? {C1O}")
     
+    return igualdad
+
+
+    #Precios relativos : Tasa a la cual el mercado te exige intercambiar un bien por otro
+    # -px/py    
+
     
     
     
