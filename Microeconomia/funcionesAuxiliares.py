@@ -100,12 +100,11 @@ def verificarC1O(it1, it2):
     # La condición de optimalidad indica que la tasa a la que el individuo intercambia un bien por otro es igual a la tasa a la que el mercado lo hace, esto no tiene nada que ver con el valor de la renta que percibe
     
     sp.pprint(f'Igualdad para verificar la 1er cond de optimalidad: {igualdad}')
-    ig = sp.solve(igualdad, y)[0]
-        
-    sp.pprint(f"ig: {ig}")
+    ig = sp.solve(igualdad, y)
+    sp.pprint(f"ig: {ig}") # ¿Por qué a veces la formula esta en primer posición (1.1) ig[0] y otras veces (1.2) está en la segunda posicion de ig[1]
     
     C1O = False    
-    if ig == px*x/py: # TODO: arreglar esto , algo no está evaluando bien
+    if ig[0] == px*x/py: # TODO: arreglar esto , algo no está evaluando bien
         C1O = True
     
     sp.pprint(f"La condición de primer orden se cumple? {C1O}")
