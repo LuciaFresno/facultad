@@ -4,8 +4,8 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     sp.init_printing()
     m, x, y, px, py, t , xoptimo, yoptimo = sp.symbols('m, x, y, px, py, t, xoptimo, yoptimo')
     #Precios relativos : Tasa a la cual el mercado te exige intercambiar un bien por otro
-
-    preciosRelativos = sp.Rational( -ipx / ipy )
+    preciosRelativos = sp.Rational( ( -ipx ), ipy )
+    
     # armo el lagrangiano
     Lagrange = FuncObjetivo + t *(SujetoA) 
     
