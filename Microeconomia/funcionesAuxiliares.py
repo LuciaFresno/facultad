@@ -84,7 +84,7 @@ def graficarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     
     p1.append(p2[0])
     p1
-    p1.show() # TODO: me gustaría poder rotar el gráfico para que sea vea bien el punto en que se intersecan
+    p1.show() # TODO: me gustaría poder rotar el gráfico para que sea vea bien el punto en que se intersecan, quizás que se vean sólo líneasen el plano X Y
     
 
 
