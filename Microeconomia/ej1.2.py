@@ -31,7 +31,7 @@ ej12a
 
 # b) Si su renta se incrementa en $135, ¿cuáles serían las nuevas cantidades que consumiría si desea maximizar su nivel de satisfacción?
 
-bm = am + 135
+bm = am + 135 # 405
 bpx, bpy = apx, apy
 ej12b = aux.maximizarRestriccion(Utilidad,
                          Presupuesto,
@@ -45,8 +45,9 @@ ej12b
 
 
 cm = am + 90
-cpx = apx + 15
-cpy = apy + 45
+cpx = apx + 15 # *1.5
+cpy = apy + 45 # *1.5
+
 ej12c = aux.maximizarRestriccion(Utilidad,
                          Presupuesto,
                          cm,

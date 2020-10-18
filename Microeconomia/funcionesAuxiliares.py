@@ -3,7 +3,9 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     import sympy as sp
     sp.init_printing()
     m, x, y, px, py, t , xoptimo, yoptimo = sp.symbols('m, x, y, px, py, t, xoptimo, yoptimo')
+    #Precios relativos : Tasa a la cual el mercado te exige intercambiar un bien por otro
 
+    preciosRelativos = sp.Rational( -ipx / ipy )
     # armo el lagrangiano
     Lagrange = FuncObjetivo + t *(SujetoA) 
     
@@ -51,7 +53,8 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     xoptimo = xoptimo.subs({'px': ipx, 'py': ipy , 'm': im})
     
     
-    return ({'Formula Lagrange': Lagrange, 
+    return ({'Precios relativos': preciosRelativos,
+             'Formula Lagrange': Lagrange, 
              'Lx': dx, 
              'Ly':  dy, 
              'Lt': dt, 
@@ -90,14 +93,14 @@ def verificarC1O(it1, it2):
     sp.init_printing()
     m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
     
-    igualdad = sp.Eq(it1-it2)
+    igualdad = sp.Eq(it1-it2, 0)
     
     # evalúo condicion de primer orden 
     # Muestra en que punto, la tasa a la que el mercado intercambia un bien por otro es igual a la tasa a la que el consumidor lo hace. Muestra en que punto  e encuentra la cesta de bienes que maximiza la utilidad del consumidor ya que gasta toda su renta
     # La condición de optimalidad indica que la tasa a la que el individuo intercambia un bien por otro es igual a la tasa a la que el mercado lo hace, esto no tiene nada que ver con el valor de la renta que percibe
     
     sp.pprint(f'Igualdad para verificar la 1er cond de optimalidad: {igualdad}')
-    ig = sp.solve(igualdad, y)[0]   
+    ig = sp.solve(igualdad, y)[0]
         
     sp.pprint(f"ig: {ig}")
     
@@ -108,13 +111,6 @@ def verificarC1O(it1, it2):
     sp.pprint(f"La condición de primer orden se cumple? {C1O}")
     
     return igualdad
-
-
-    #Precios relativos : Tasa a la cual el mercado te exige intercambiar un bien por otro
-    # -px/py    
-
-    
-    
     
 # =============================================================================
 #     # TODO: evalúo condición de segundo orden
