@@ -45,8 +45,8 @@ ej12b
 
 
 cm = am + 90
-cpx = apx + 15 # *1.5
-cpy = apy + 45 # *1.5
+cpx = 15 # *1.5
+cpy = 45 # *1.5
 
 ej12c = aux.maximizarRestriccion(Utilidad,
                          Presupuesto,
