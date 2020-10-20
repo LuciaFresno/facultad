@@ -91,3 +91,32 @@ def graficarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
     p1
     p1.show() # TODO: me gustaría poder rotar el gráfico para que sea vea bien el punto en que se intersecan, quizás que se vean sólo líneasen el plano X Y
     
+
+
+def cumpleC1O(funcObjetivo, px, py):
+    import sympy as sp
+    sp.init_printing()
+    m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
+    if funcObjetivo.diff(x)/funcObjetivo(y) == px/py:
+        C1O = True
+    else:
+        C1O = False
+        
+    sp.pprint(funcObjetivo.diff(x)/funcObjetivo(y))
+    
+    # evalúo condicion de primer orden 
+    # Muestra en que punto, la tasa a la que el mercado intercambia un bien por otro es igual a la tasa a la que el consumidor lo hace. Muestra en que punto  e encuentra la cesta de bienes que maximiza la utilidad del consumidor ya que gasta toda su renta
+    # La condición de optimalidad indica que la tasa a la que el individuo intercambia un bien por otro es igual a la tasa a la que el mercado lo hace, esto no tiene nada que ver con el valor de la renta que percibe
+    
+    return C1O
+    
+# =============================================================================
+#     # TODO: evalúo condición de segundo orden
+#     # https://stackoverflow.com/questions/26798615/determinant-using-sympy
+#     C2O = True
+#     
+#     # TODO: evalúo la relación entre los bienes x e y 
+#     relacion = 'normal'
+#     
+#     
+# =============================================================================
