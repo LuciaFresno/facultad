@@ -65,34 +65,6 @@ def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
              'yoptimo': float(yoptimo)   })
 
 
-
-
-
-
-# grafico las dos formulas 
-def graficarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
-    import sympy as sp
-    sp.init_printing()
-    m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
-    from sympy.plotting import plot3d
-    
-    limx = im / ipx 
-    limy = im / ipy 
-    
-    SAGraficable = sp.solve(SujetoA, 'm')[0] 
-    SAGraficable = SAGraficable.subs({'px' : ipx , 'py' : ipy}) 
-    
-    
-    p1 = plot3d(FuncObjetivo,(x, 0, limx), (y,0,limy), show=False)
-    p2 = plot3d(SAGraficable, show=False)
-    # TODO: cambio de color una de las dos para diferenciarlas 
-    
-    p1.append(p2[0])
-    p1
-    p1.show() # TODO: me gustaría poder rotar el gráfico para que sea vea bien el punto en que se intersecan, quizás que se vean sólo líneasen el plano X Y
-    
-
-
 def cumpleC1O(funcObjetivo, px, py):
     import sympy as sp
     sp.init_printing()
@@ -109,14 +81,3 @@ def cumpleC1O(funcObjetivo, px, py):
     # La condición de optimalidad indica que la tasa a la que el individuo intercambia un bien por otro es igual a la tasa a la que el mercado lo hace, esto no tiene nada que ver con el valor de la renta que percibe
     
     return C1O
-    
-# =============================================================================
-#     # TODO: evalúo condición de segundo orden
-#     # https://stackoverflow.com/questions/26798615/determinant-using-sympy
-#     C2O = True
-#     
-#     # TODO: evalúo la relación entre los bienes x e y 
-#     relacion = 'normal'
-#     
-#     
-# =============================================================================
