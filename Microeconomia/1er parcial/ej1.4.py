@@ -8,7 +8,6 @@
 
 import sympy as sp
 sp.init_printing()
-import funcionesAuxiliares as aux
 
 
 m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')

@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
-def maximizarRestriccion(FuncObjetivo, SujetoA, im, ipx, ipy):
+def maximizarRestriccion(funcObjetivo, sujetoA, im = '', ipx = '', ipy = ''):
     import sympy as sp
     sp.init_printing()
     m, x, y, px, py, t , xoptimo, yoptimo = sp.symbols('m, x, y, px, py, t, xoptimo, yoptimo')
     #Precios relativos : Tasa a la cual el mercado te exige intercambiar un bien por otro
-    preciosRelativos = sp.Rational( ( -ipx ), ipy )
+    if ipy and ipx:
+        preciosRelativos = sp.Rational( ( -ipx ), ipy )
+    else:
+        preciosRelativos = -px/py
+    
+    cumpleC1O(funcObjetivo, px, py)
     
     # armo el lagrangiano
-    Lagrange = FuncObjetivo + t *(SujetoA) 
+    Lagrange = funcObjetivo + t *(sujetoA) 
     
     
     # derivo en función de cada variable 
@@ -69,7 +74,7 @@ def cumpleC1O(funcObjetivo, px, py):
     import sympy as sp
     sp.init_printing()
     m, x, y, px, py, t = sp.symbols('m,x,y,px,py,t')
-    if funcObjetivo.diff(x)/funcObjetivo(y) == px/py:
+    if funcObjetivo.diff(x)/funcObjetivo.diff(y) == px/py:
         C1O = True
     else:
         C1O = False

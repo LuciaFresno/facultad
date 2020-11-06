@@ -25,9 +25,3 @@ ej11 = aux.maximizarRestriccion(Utilidad,
                      5)
 
 ej11
-
-aux.graficarRestriccion(Utilidad,
-                    Presupuesto,
-                    100,
-                    2,
-                    5)
